@@ -44,3 +44,13 @@ const onClickAdd = () => {
 document
   .getElementById("add-button")
   .addEventListener("click", () => onClickAdd());
+
+// 祖先要素を取得する方法
+```js
+closest(“セレクタ名”)
+```
+
+// 親要素を取得する方法
+```js
+parentNode
+```
