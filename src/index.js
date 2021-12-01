@@ -5,6 +5,11 @@ const onClickAdd = () => {
   const inputText = document.getElementById("add-text").value;
   document.getElementById("add-text").value = "";
 
+  createIncompleteList(inputText);
+};
+
+// 未完了リストに追加する関数
+const createIncompleteList = (text) => {
   // li生成
   const li = document.createElement("li");
   li.className = "incomplete-item";
@@ -15,7 +20,7 @@ const onClickAdd = () => {
 
   // pタグ生成
   const p = document.createElement("p");
-  p.innerText = inputText;
+  p.innerText = text;
 
   // button(完了)タグ生成
   const completeButton = document.createElement("button");
@@ -48,6 +53,15 @@ const onClickAdd = () => {
     // button(戻る)タグ生成
     const ｂａｃｋButton = document.createElement("button");
     ｂａｃｋButton.innerText = "戻す";
+    ｂａｃｋButton.addEventListener("click", () => {
+      // 押下された戻すボタンの親タグ(div)を完了リストから削除
+      const deleteTarget = ｂａｃｋButton.closest(".incomplete-item");
+      document.getElementById("complete-list").removeChild(deleteTarget);
+
+      // TODO内容テキストを取得
+      const text = ｂａｃｋButton.parentNode.firstElementChild.innerText; // 他の指定方法あるはず
+      createIncompleteList(text);
+    });
 
     // divタグの子要素に各要素を設定
     addTarget.appendChild(div);
@@ -56,8 +70,6 @@ const onClickAdd = () => {
 
     // 完了の子要素に各要素を設定
     document.getElementById("complete-list").appendChild(addTarget);
-
-    // console.log(addTarget);
   });
 
   // button(削除)タグ生成
